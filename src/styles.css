@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Optional background polish */
+  background: radial-gradient(1200px circle at 50% 10%, #f6f8ff 0%, #eef1ff 40%, #e6eaff 100%);
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+h4 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+h5 {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+h6 {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+ul {
+  padding-inline-start: 20px;
+}
+
+/* Board container */
+.board {
+  width: min(95vmin, 600px);   /* use the smaller viewport dimension to keep it square */
+  aspect-ratio: 1 / 1;         /* square board */
+  padding: clamp(8px, 2vmin, 24px);
+  background: #ffffffcc;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.board h1 {
+  margin: 0 0 clamp(8px, 2vmin, 24px);
+  text-align: center;
+  font-size: clamp(2rem, 5vmin, 3rem);
+  color: #334155;
+}
+
+.status {
+  text-align: center;
+  margin-bottom: clamp(8px, 2vmin, 20px);
+  font-weight: 600;
+  color: #475569;
+  font-size: clamp(1.5rem, 3.5vmin, 4rem);
+}
+
+/* Use grid for each row */
+.board-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(6px, 1.5vmin, 16px);
+}
+
+/* Space between rows */
+.board-row + .board-row {
+  margin-top: clamp(6px, 1.5vmin, 16px);
+}
+
+/* Squares scale with viewport and stay square */
+.square {
+  float: none;                  /* override old float */
+  margin: 0;                    /* override old negative margins */
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: clamp(1.5rem, 12vmin, 6rem); /* scales up with screen size */
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: transform 80ms ease, border-color 250ms ease, box-shadow 250ms ease;
+}
+
+.square:hover {
+  border-color: #6366f1;
+  box-shadow: 0 4px 18px rgba(99,102,241,0.15);
+  transform: translateY(-2px);
+}
+
+.square:active {
+  transform: translateY(0);
+}
+
+/* Ensure the page always matches viewport height */
+html, body, #root {
+  height: 100%;
+  min-height: 100vh; /* fallback */
+}
+
+/* Center content vertically and horizontally inside the root */
+#root {
+  height: 90vh;              /* fallback */
+  display: grid;
+  place-items: center;        /* centers the board */
+}
+
+/* Use dynamic viewport height for mobile browser chrome */
+@supports (height: 100dvh) {
+  #root {
+    height: 100dvh;           /* exact viewport height on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .board { border-radius: 12px; }
+  .square { border-radius: 10px; }
+}
+
+.play-again {
+  display: block;
+  margin: clamp(10px, 2vmin, 20px) auto 0;
+  padding: clamp(10px, 2vmin, 16px) clamp(18px, 4vmin, 36px);
+  font-size: clamp(1rem, 2.5vmin, 1.5rem);
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+  transition: transform 120ms ease, box-shadow 200ms ease, filter 200ms ease;
+}
+
+.play-again:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+}
+
+.play-again:active {
+  transform: translateY(0);
+}
+
+
