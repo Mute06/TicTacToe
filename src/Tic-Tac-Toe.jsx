@@ -143,8 +143,9 @@ export default function Game(){
                 <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
             <div className="game-info">
-                <button onClick={toggleSortOrder}>
+                <button className="sort-button" onClick={toggleSortOrder}>
                     {asc ? <AscendingIcon /> : <DescendingIcon />}
+                    <span>{asc ? 'Oldest First' : 'Newest First'}</span>
                 </button>
                 <ol>{moves}</ol>
 
