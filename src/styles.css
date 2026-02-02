@@ -10,7 +10,9 @@ body {
   align-items: center;
   justify-content: center;
   /* Optional background polish */
-  background: radial-gradient(1200px circle at 50% 10%, #f6f8ff 0%, #eef1ff 40%, #e6eaff 100%);
+  background: #2A7B9B;
+  background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 192, 199, 1) 55%, rgba(39, 176, 80, 1) 100%);
+  /*background: radial-gradient(1200px circle at 50% 10%, #a0d1ff 0%, #eefaff 40%, #091550 100%);*/
 }
 
 h1 {
@@ -50,6 +52,7 @@ code {
 ul {
   padding-inline-start: 20px;
 }
+
 
 /* Board container */
 .board {
@@ -108,10 +111,15 @@ ul {
   cursor: pointer;
   transition: transform 80ms ease, border-color 250ms ease, box-shadow 250ms ease;
 }
+.square-winning {
+  background: #fffbeb;
+  border-color: #fbbf24;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+}
 
 .square:hover {
-  border-color: #6366f1;
-  box-shadow: 0 4px 18px rgba(99,102,241,0.15);
+  border-color: #035287;
+  box-shadow: 0 4px 18px rgba(48, 48, 160, 0.15);
   transform: translateY(-2px);
 }
 
@@ -151,22 +159,110 @@ html, body, #root {
   font-size: clamp(1rem, 2.5vmin, 1.5rem);
   font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: linear-gradient(135deg, #51a8e6, #044081);
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 8px 20px rgba(10, 51, 99, 0.25);
   transition: transform 120ms ease, box-shadow 200ms ease, filter 200ms ease;
 }
 
 .play-again:hover {
   filter: brightness(1.05);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 10px 24px rgba(8, 42, 146, 0.35);
 }
 
 .play-again:active {
   transform: translateY(0);
+}
+
+/* Put board and moves list side-by-side */
+.game {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: clamp(12px, 3vmin, 28px);
+}
+
+/* Keep board from stretching oddly */
+.game-board {
+  flex: 0 0 auto;
+}
+
+/* Moves panel */
+.game-info {
+  flex: 0 0 min(320px, 40vw);
+  max-height: min(75vh, 600px);
+  overflow: auto;
+
+  padding: clamp(10px, 2vmin, 16px);
+  background: #ffffffcc;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Clean list look */
+.game-info ol {
+  margin: 0;
+  padding-left: 18px; /* keep numbers aligned */
+}
+
+.game-info li {
+  margin: 10px 0;
+}
+
+/* Move buttons */
+.move-button {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  background: #eef3ff;      /* dark */
+  color: #031021;
+  border: 1px solid #334155;
+
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+
+  cursor: pointer;
+  transition: transform 80ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.move-button:hover {
+  border-color: #0a162e;
+  background: #c5d7ff;
+  transform: translateY(-1px);
+}
+
+/* Current move label (when move === currentMove) */
+.current-move {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, #105833, #048155);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* Small screens: stack instead of squeezing */
+@media (max-width: 720px) {
+  .game {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .game-info {
+    flex: 1 1 auto;
+    max-height: none;
+  }
 }
 
 
